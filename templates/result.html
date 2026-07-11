@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}Result{% endblock %}
+
+{% block content %}
+<section class="result-section section-padding-top">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="opticrop-breadcrumb mb-4" data-animate="fade-up">
+            <a href="{{ url_for('index') }}">Home</a>
+            <i class="fas fa-chevron-right mx-2"></i>
+            <span>Recommendation Result</span>
+        </nav>
+
+        <!-- Hero Result Banner -->
+        <div class="result-banner glass-card text-center" data-animate="fade-up">
+            <div class="result-banner-icon">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <span class="result-label">Recommended Crop</span>
+            <h1 class="result-crop-name text-capitalize">{{ crop }}</h1>
+            <div class="result-confidence-wrapper mt-3">
+                <div class="result-confidence-bar">
+                    <div class="result-confidence-fill" style="width: {{ confidence }}%"></div>
+                </div>
+                <span class="result-confidence-text">Confidence: {{ confidence }}%</span>
+            </div>
+        </div>
+
+        <!-- Input Summary -->
+        <div class="row g-3 mt-2" data-animate="fade-up">
+            <div class="col-12">
+                <h4 class="detail-section-title"><i class="fas fa-clipboard-list me-2"></i>Your Input Parameters</h4>
+            </div>
+            {% for feat, val in inputs.items() %}
+            <div class="col-md-6 col-lg-3">
+                <div class="input-summary-card glass-card">
+                    <span class="input-summary-label">{{ feat|capitalize }}</span>
+                    <span class="input-summary-value">{{ val }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Crop Details -->
+        <div class="row g-4 mt-2">
+            <div class="col-lg-6" data-animate="fade-right">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-green">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h5>Suitable Season</h5>
+                    </div>
+                    <p class="detail-card-body">{{ info.season }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6" data-animate="fade-left">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-blue">
+                        <i class="fas fa-tint"></i>
+                        <h5>Water Requirement</h5>
+                    </div>
+                    <p class="detail-card-body">{{ info.water }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6" data-animate="fade-right">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-orange">
+                        <i class="fas fa-flask"></i>
+                        <h5>Fertilizer Recommendation</h5>
+                    </div>
+                    <p class="detail-card-body">{{ info.fertilizer }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6" data-animate="fade-left">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-purple">
+                        <i class="fas fa-chart-line"></i>
+                        <h5>Expected Productivity</h5>
+                    </div>
+                    <p class="detail-card-body">{{ info.productivity }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits & Practices -->
+        <div class="row g-4 mt-2">
+            <div class="col-lg-6" data-animate="fade-up">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-green">
+                        <i class="fas fa-thumbs-up"></i>
+                        <h5>Benefits of {{ crop|capitalize }}</h5>
+                    </div>
+                    <p class="detail-card-body">{{ info.benefits }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6" data-animate="fade-up">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-blue">
+                        <i class="fas fa-tractor"></i>
+                        <h5>Suggested Farming Practices</h5>
+                    </div>
+                    <p class="detail-card-body">{{ info.practices }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suitable Conditions -->
+        {% if info.ideal %}
+        <div class="row g-4 mt-2" data-animate="fade-up">
+            <div class="col-12">
+                <div class="detail-card glass-card">
+                    <div class="detail-card-header icon-orange">
+                        <i class="fas fa-bullseye"></i>
+                        <h5>Suitable Conditions for {{ crop|capitalize }}</h5>
+                    </div>
+                    <div class="ideal-conditions-grid mt-3">
+                        {% for feat, (lo, hi) in info.ideal.items() %}
+                        <div class="ideal-condition-pill">
+                            <span class="ideal-cond-label">{{ feat|capitalize }}</span>
+                            <span class="ideal-cond-value">{{ lo }} – {{ hi }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Alternative Crops -->
+        {% if top_crops %}
+        <div class="row g-4 mt-2" data-animate="fade-up">
+            <div class="col-12">
+                <h4 class="detail-section-title"><i class="fas fa-list-ol me-2"></i>Top Alternative Crops</h4>
+                <div class="row g-3">
+                    {% for alt_crop, prob in top_crops %}
+                    <div class="col-md-4">
+                        <div class="alt-crop-card glass-card">
+                            <span class="alt-crop-rank">#{{ loop.index }}</span>
+                            <h6 class="text-capitalize mb-1">{{ alt_crop }}</h6>
+                            <div class="alt-crop-bar">
+                                <div class="alt-crop-bar-fill" style="width: {{ (prob*100)|round(1) }}%"></div>
+                            </div>
+                            <span class="alt-crop-prob">{{ (prob*100)|round(1) }}%</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Actions -->
+        <div class="text-center mt-5 mb-4" data-animate="fade-up">
+            <a href="{{ url_for('index') }}#predict" class="btn btn-hero-primary me-2">
+                <i class="fas fa-redo me-2"></i>Predict Again
+            </a>
+            <a href="{{ url_for('suitability') }}" class="btn btn-hero-secondary">
+                <i class="fas fa-check-circle me-2"></i>Check Suitability
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

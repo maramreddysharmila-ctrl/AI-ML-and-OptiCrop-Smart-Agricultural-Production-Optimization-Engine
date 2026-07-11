@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- ===== Hero Section ===== -->
+<section class="hero-section">
+    <div class="hero-bg-overlay"></div>
+    <div class="container hero-content">
+        <div class="row align-items-center min-vh-100-adj">
+            <div class="col-lg-7 text-center text-lg-start" data-animate="fade-right">
+                <div class="hero-badge mb-3">
+                    <i class="fas fa-leaf me-2"></i>SmartBridge Virtual Internship
+                </div>
+                <h1 class="hero-title">
+                    Smart Agricultural<br>
+                    <span class="text-gradient">Production Optimization</span><br>
+                    Engine
+                </h1>
+                <p class="hero-subtitle mt-3">
+                    An AI-powered recommendation system that predicts the most suitable crop
+                    for your land based on soil nutrients and environmental conditions.
+                </p>
+                <div class="hero-cta mt-4">
+                    <a href="#predict" class="btn btn-hero-primary me-2">
+                        <i class="fas fa-chart-line me-2"></i>Get Recommendation
+                    </a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-hero-secondary">
+                        <i class="fas fa-chart-pie me-2"></i>View Dashboard
+                    </a>
+                </div>
+                <div class="hero-stats mt-5">
+                    <div class="hero-stat">
+                        <h3>22</h3>
+                        <p>Crops</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>7</h3>
+                        <p>Features</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>87%</h3>
+                        <p>Accuracy</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>5</h3>
+                        <p>ML Models</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block" data-animate="fade-left">
+                <div class="hero-visual">
+                    <div class="hero-card glass-card">
+                        <div class="hero-card-icon"><i class="fas fa-tractor"></i></div>
+                        <h4>AI-Powered Farming</h4>
+                        <p>Enter your soil parameters and get instant crop recommendations powered by Random Forest machine learning.</p>
+                        <div class="hero-card-tags">
+                            <span class="tag-pill">Nitrogen</span>
+                            <span class="tag-pill">Phosphorous</span>
+                            <span class="tag-pill">Potassium</span>
+                            <span class="tag-pill">pH</span>
+                            <span class="tag-pill">Rainfall</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#predict" class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
+</section>
+
+<!-- ===== Project Description ===== -->
+<section class="section-padding" id="about-project">
+    <div class="container">
+        <div class="text-center mb-5" data-animate="fade-up">
+            <span class="section-tag">Overview</span>
+            <h2 class="section-title">About OptiCrop</h2>
+            <p class="section-subtitle mx-auto">
+                OptiCrop uses Machine Learning to analyze soil and climate parameters,
+                recommending the optimal crop for maximum yield and sustainability.
+            </p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" data-animate="fade-up">
+                <div class="info-card glass-card h-100">
+                    <div class="info-card-icon icon-blue"><i class="fas fa-flask"></i></div>
+                    <h5>Soil Analysis</h5>
+                    <p>Analyzes N, P, K levels and pH to understand soil fertility and recommend suitable crops.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-animate="fade-up" data-delay="100">
+                <div class="info-card glass-card h-100">
+                    <div class="info-card-icon icon-green"><i class="fas fa-cloud-sun-rain"></i></div>
+                    <h5>Climate Matching</h5>
+                    <p>Matches temperature, humidity, and rainfall conditions to each crop's ideal growing environment.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-animate="fade-up" data-delay="200">
+                <div class="info-card glass-card h-100">
+                    <div class="info-card-icon icon-orange"><i class="fas fa-brain"></i></div>
+                    <h5>ML Prediction</h5>
+                    <p>Trained on 2,200+ samples using Random Forest, Decision Tree, KNN, and Logistic Regression.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-animate="fade-up" data-delay="300">
+                <div class="info-card glass-card h-100">
+                    <div class="info-card-icon icon-purple"><i class="fas fa-chart-bar"></i></div>
+                    <h5>Research Dashboard</h5>
+                    <p>Interactive visualizations for crop distribution, NPK analysis, and environmental trends.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Animated Feature Cards ===== -->
+<section class="section-padding bg-overlay-section">
+    <div class="container">
+        <div class="text-center mb-5" data-animate="fade-up">
+            <span class="section-tag">How It Works</span>
+            <h2 class="section-title">Three Smart Scenarios</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-animate="fade-up">
+                <div class="scenario-card glass-card h-100">
+                    <div class="scenario-number">01</div>
+                    <div class="scenario-icon icon-green"><i class="fas fa-seedling"></i></div>
+                    <h5>Crop Recommendation</h5>
+                    <p>Enter your soil and climate values. The system predicts the best crop to plant for your conditions.</p>
+                    <a href="#predict" class="scenario-link">Try it <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4" data-animate="fade-up" data-delay="100">
+                <div class="scenario-card glass-card h-100">
+                    <div class="scenario-number">02</div>
+                    <div class="scenario-icon icon-blue"><i class="fas fa-clipboard-check"></i></div>
+                    <h5>Suitability Check</h5>
+                    <p>Select a crop and enter conditions. The system checks if your environment is suitable and gives a score.</p>
+                    <a href="{{ url_for('suitability') }}" class="scenario-link">Check now <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4" data-animate="fade-up" data-delay="200">
+                <div class="scenario-card glass-card h-100">
+                    <div class="scenario-number">03</div>
+                    <div class="scenario-icon icon-orange"><i class="fas fa-chart-pie"></i></div>
+                    <h5>Research Dashboard</h5>
+                    <p>Explore crop distributions, NPK analysis, rainfall, temperature, and humidity patterns interactively.</p>
+                    <a href="{{ url_for('dashboard') }}" class="scenario-link">Explore <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Prediction Form ===== -->
+<section class="section-padding" id="predict">
+    <div class="container">
+        <div class="text-center mb-5" data-animate="fade-up">
+            <span class="section-tag">Scenario 1</span>
+            <h2 class="section-title">Crop Recommendation Engine</h2>
+            <p class="section-subtitle mx-auto">
+                Enter your soil and environmental parameters below to get an AI-powered crop recommendation.
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="prediction-form-wrapper glass-card" data-animate="fade-up">
+                    <form id="predictionForm" action="{{ url_for('predict') }}" method="POST">
+                        <div class="row g-4">
+                            <!-- Nitrogen -->
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="N">
+                                    <i class="fas fa-vial me-2"></i>Nitrogen (N)
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="N" name="N"
+                                        placeholder="0 – 140" value="{{ form.N if form else '' }}" required>
+                                    <span class="input-unit">kg/ha</span>
+                                </div>
+                            </div>
+                            <!-- Phosphorous -->
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="P">
+                                    <i class="fas fa-vial me-2"></i>Phosphorous (P)
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="P" name="P"
+                                        placeholder="0 – 145" value="{{ form.P if form else '' }}" required>
+                                    <span class="input-unit">kg/ha</span>
+                                </div>
+                            </div>
+                            <!-- Potassium -->
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="K">
+                                    <i class="fas fa-vial me-2"></i>Potassium (K)
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="K" name="K"
+                                        placeholder="0 – 205" value="{{ form.K if form else '' }}" required>
+                                    <span class="input-unit">kg/ha</span>
+                                </div>
+                            </div>
+                            <!-- Temperature -->
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="temperature">
+                                    <i class="fas fa-thermometer-half me-2"></i>Temperature
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="temperature" name="temperature"
+                                        placeholder="8 – 45" value="{{ form.temperature if form else '' }}" required>
+                                    <span class="input-unit">°C</span>
+                                </div>
+                            </div>
+                            <!-- Humidity -->
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="humidity">
+                                    <i class="fas fa-tint me-2"></i>Humidity
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="humidity" name="humidity"
+                                        placeholder="10 – 100" value="{{ form.humidity if form else '' }}" required>
+                                    <span class="input-unit">%</span>
+                                </div>
+                            </div>
+                            <!-- pH -->
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="ph">
+                                    <i class="fas fa-balance-scale me-2"></i>pH Value
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="ph" name="ph"
+                                        placeholder="3.5 – 9.5" value="{{ form.ph if form else '' }}" required>
+                                    <span class="input-unit">pH</span>
+                                </div>
+                            </div>
+                            <!-- Rainfall -->
+                            <div class="col-12">
+                                <label class="form-label-opticrop" for="rainfall">
+                                    <i class="fas fa-cloud-rain me-2"></i>Rainfall
+                                </label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="rainfall" name="rainfall"
+                                        placeholder="10 – 300" value="{{ form.rainfall if form else '' }}" required>
+                                    <span class="input-unit">mm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-predict-animated" id="predictBtn">
+                                <span class="btn-predict-text">
+                                    <i class="fas fa-brain me-2"></i>Predict Best Crop
+                                </span>
+                                <span class="btn-predict-loader d-none">
+                                    <span class="spinner-border spinner-border-sm me-2"></span>Analyzing...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

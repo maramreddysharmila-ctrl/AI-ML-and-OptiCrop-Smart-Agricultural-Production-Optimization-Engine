@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="section-padding-top section-padding">
+    <div class="container">
+        <!-- Header -->
+        <div class="text-center mb-5" data-animate="fade-up">
+            <span class="section-tag">About</span>
+            <h2 class="section-title">About OptiCrop</h2>
+            <p class="section-subtitle mx-auto">
+                A Machine Learning-powered agricultural recommendation system for smart farming decisions.
+            </p>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8" data-animate="fade-right">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-green">
+                        <i class="fas fa-bullseye"></i>
+                        <h5>Project Objective</h5>
+                    </div>
+                    <div class="detail-card-body">
+                        <p>OptiCrop is a Machine Learning-powered agricultural recommendation system that predicts the most suitable crop based on seven key parameters:</p>
+                        <ul class="detail-list">
+                            <li><i class="fas fa-vial text-success me-2"></i><strong>Nitrogen (N)</strong> – soil nitrogen content</li>
+                            <li><i class="fas fa-vial text-success me-2"></i><strong>Phosphorous (P)</strong> – soil phosphorous content</li>
+                            <li><i class="fas fa-vial text-success me-2"></i><strong>Potassium (K)</strong> – soil potassium content</li>
+                            <li><i class="fas fa-thermometer-half text-primary me-2"></i><strong>Temperature</strong> – ambient temperature in °C</li>
+                            <li><i class="fas fa-tint text-primary me-2"></i><strong>Humidity</strong> – relative humidity percentage</li>
+                            <li><i class="fas fa-balance-scale text-primary me-2"></i><strong>pH</strong> – soil pH value</li>
+                            <li><i class="fas fa-cloud-rain text-primary me-2"></i><strong>Rainfall</strong> – annual rainfall in mm</li>
+                        </ul>
+                        <p class="mt-3">The system helps farmers, agricultural researchers, agribusiness companies, and policymakers make intelligent farming decisions to maximize yield and optimize resource usage.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" data-animate="fade-left">
+                <div class="detail-card glass-card h-100">
+                    <div class="detail-card-header icon-blue">
+                        <i class="fas fa-users"></i>
+                        <h5>Target Audience</h5>
+                    </div>
+                    <ul class="detail-list">
+                        <li><i class="fas fa-tractor text-success me-2"></i>Farmers</li>
+                        <li><i class="fas fa-flask text-primary me-2"></i>Agricultural Researchers</li>
+                        <li><i class="fas fa-building text-warning me-2"></i>Agribusiness Companies</li>
+                        <li><i class="fas fa-landmark text-info me-2"></i>Policymakers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="row g-4 mb-4" data-animate="fade-up">
+            <div class="col-12">
+                <div class="detail-card glass-card">
+                    <div class="detail-card-header icon-orange">
+                        <i class="fas fa-laptop-code"></i>
+                        <h5>Technology Stack</h5>
+                    </div>
+                    <div class="tech-stack-grid mt-3">
+                        <div class="tech-pill"><i class="fab fa-python"></i> Python 3.10+</div>
+                        <div class="tech-pill"><i class="fas fa-flask"></i> Flask</div>
+                        <div class="tech-pill"><i class="fas fa-robot"></i> Scikit-learn</div>
+                        <div class="tech-pill"><i class="fas fa-calculator"></i> NumPy</div>
+                        <div class="tech-pill"><i class="fas fa-table"></i> Pandas</div>
+                        <div class="tech-pill"><i class="fas fa-square-root-variable"></i> SciPy</div>
+                        <div class="tech-pill"><i class="fas fa-file-code"></i> Pickle</div>
+                        <div class="tech-pill"><i class="fab fa-html5"></i> HTML5</div>
+                        <div class="tech-pill"><i class="fab fa-css3-alt"></i> CSS3</div>
+                        <div class="tech-pill"><i class="fab fa-bootstrap"></i> Bootstrap 5</div>
+                        <div class="tech-pill"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="tech-pill"><i class="fas fa-chart-line"></i> Matplotlib</div>
+                        <div class="tech-pill"><i class="fas fa-chart-pie"></i> Seaborn</div>
+                        <div class="tech-pill"><i class="fas fa-tree"></i> Decision Tree</div>
+                        <div class="tech-pill"><i class="fas fa-forest"></i> Random Forest</div>
+                        <div class="tech-pill"><i class="fas fa-project-diagram"></i> KNN</div>
+                        <div class="tech-pill"><i class="fas fa-vector-square"></i> Logistic Regression</div>
+                        <div class="tech-pill"><i class="fas fa-circle-nodes"></i> K-Means Clustering</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ML Models -->
+        <div class="row g-4" data-animate="fade-up">
+            <div class="col-12">
+                <div class="detail-card glass-card">
+                    <div class="detail-card-header icon-purple">
+                        <i class="fas fa-brain"></i>
+                        <h5>Machine Learning Models Compared</h5>
+                    </div>
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="model-info-card">
+                                <h6><i class="fas fa-tree text-success me-2"></i>Decision Tree</h6>
+                                <p>Tree-based model that splits data by feature thresholds. Easy to interpret but prone to overfitting.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="model-info-card">
+                                <h6><i class="fas fa-forest text-success me-2"></i>Random Forest</h6>
+                                <p>Ensemble of decision trees. Best accuracy in this project. Robust to overfitting.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="model-info-card">
+                                <h6><i class="fas fa-vector-square text-primary me-2"></i>Logistic Regression</h6>
+                                <p>Linear model for classification. Fast and provides probability estimates.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="model-info-card">
+                                <h6><i class="fas fa-project-diagram text-primary me-2"></i>K-Nearest Neighbors</h6>
+                                <p>Instance-based learner that classifies by majority vote of nearest neighbors.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="model-info-card">
+                                <h6><i class="fas fa-circle-nodes text-warning me-2"></i>K-Means Clustering</h6>
+                                <p>Unsupervised clustering used for exploratory analysis of crop groupings.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="model-info-card">
+                                <h6><i class="fas fa-trophy text-warning me-2"></i>Best Model</h6>
+                                <p>Random Forest was automatically selected with the highest accuracy of 87.3%.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="row g-4 mt-4" data-animate="fade-up">
+            <div class="col-12">
+                <div class="detail-card glass-card">
+                    <div class="detail-card-header icon-green">
+                        <i class="fas fa-star"></i>
+                        <h5>Key Features</h5>
+                    </div>
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check text-success me-2"></i>AI-powered crop recommendation from 7 parameters</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check text-success me-2"></i>Crop suitability checker with scoring</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check text-success me-2"></i>Interactive research dashboard with charts</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check text-success me-2"></i>5 ML models compared automatically</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check text-success me-2"></i>Crop knowledge base with farming tips</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check text-success me-2"></i>Dark mode, animations, responsive design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

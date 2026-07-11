@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block title %}Suitability Check{% endblock %}
+
+{% block content %}
+<section class="section-padding-top section-padding">
+    <div class="container">
+        <div class="text-center mb-5" data-animate="fade-up">
+            <span class="section-tag">Scenario 2</span>
+            <h2 class="section-title">Crop Suitability Checker</h2>
+            <p class="section-subtitle mx-auto">
+                Select a crop and enter your current environmental conditions to see if they are suitable.
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="prediction-form-wrapper glass-card" data-animate="fade-up">
+                    <form id="suitabilityForm" action="{{ url_for('suitability') }}" method="POST">
+                        <!-- Crop Selector -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label class="form-label-opticrop" for="crop_select">
+                                    <i class="fas fa-hand-pointer me-2"></i>Select a Crop to Evaluate
+                                </label>
+                                <select class="form-select-opticrop" id="crop_select" name="crop_select" required>
+                                    <option value="" disabled {% if not selected %}selected{% endif %}>Choose a crop...</option>
+                                    {% for crop in crops %}
+                                    <option value="{{ crop }}" {% if selected == crop %}selected{% endif %} class="text-capitalize">{{ crop }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="s_N">Nitrogen (N)</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_N" name="N"
+                                        placeholder="0 – 140" value="{{ form.N if form else '' }}" required>
+                                    <span class="input-unit">kg/ha</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="s_P">Phosphorous (P)</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_P" name="P"
+                                        placeholder="0 – 145" value="{{ form.P if form else '' }}" required>
+                                    <span class="input-unit">kg/ha</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="s_K">Potassium (K)</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_K" name="K"
+                                        placeholder="0 – 205" value="{{ form.K if form else '' }}" required>
+                                    <span class="input-unit">kg/ha</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="s_temperature">Temperature</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_temperature" name="temperature"
+                                        placeholder="8 – 45" value="{{ form.temperature if form else '' }}" required>
+                                    <span class="input-unit">°C</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="s_humidity">Humidity</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_humidity" name="humidity"
+                                        placeholder="10 – 100" value="{{ form.humidity if form else '' }}" required>
+                                    <span class="input-unit">%</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-opticrop" for="s_ph">pH Value</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_ph" name="ph"
+                                        placeholder="3.5 – 9.5" value="{{ form.ph if form else '' }}" required>
+                                    <span class="input-unit">pH</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-opticrop" for="s_rainfall">Rainfall</label>
+                                <div class="input-group-opticrop">
+                                    <input type="number" step="any" class="form-control-opticrop" id="s_rainfall" name="rainfall"
+                                        placeholder="10 – 300" value="{{ form.rainfall if form else '' }}" required>
+                                    <span class="input-unit">mm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-predict-animated">
+                                <span class="btn-predict-text">
+                                    <i class="fas fa-clipboard-check me-2"></i>Check Suitability
+                                </span>
+                                <span class="btn-predict-loader d-none">
+                                    <span class="spinner-border spinner-border-sm me-2"></span>Checking...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if mode == "result" and analysis %}
+        <!-- Suitability Results -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-9" data-animate="fade-up">
+                <!-- Score Gauge -->
+                <div class="result-banner glass-card text-center">
+                    <span class="result-label">Suitability Score for <strong class="text-capitalize">{{ selected }}</strong></span>
+                    <div class="suitability-gauge mt-3">
+                        <div class="gauge-circle" style="--gauge-percent: {{ analysis.score }};">
+                            <span class="gauge-value">{{ analysis.score }}%</span>
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        {% if analysis.score >= 80 %}
+                            <span class="badge bg-success px-3 py-2">Highly Suitable</span>
+                        {% elif analysis.score >= 50 %}
+                            <span class="badge bg-warning px-3 py-2">Moderately Suitable</span>
+                        {% else %}
+                            <span class="badge bg-danger px-3 py-2">Not Suitable</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <!-- Advantages -->
+                    <div class="col-lg-6">
+                        <div class="detail-card glass-card h-100">
+                            <div class="detail-card-header icon-green">
+                                <i class="fas fa-thumbs-up"></i>
+                                <h5>Advantages</h5>
+                            </div>
+                            <ul class="detail-list">
+                                {% for adv in analysis.advantages %}
+                                <li><i class="fas fa-check-circle text-success me-2"></i>{{ adv }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Issues -->
+                    <div class="col-lg-6">
+                        <div class="detail-card glass-card h-100">
+                            <div class="detail-card-header icon-orange">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h5>Possible Issues</h5>
+                            </div>
+                            {% if analysis.issues %}
+                            <ul class="detail-list">
+                                {% for issue in analysis.issues %}
+                                <li><i class="fas fa-times-circle text-warning me-2"></i>{{ issue }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p class="detail-card-body">No issues detected. All conditions are within the ideal range.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggestions -->
+                <div class="row g-4 mt-2">
+                    <div class="col-12">
+                        <div class="detail-card glass-card">
+                            <div class="detail-card-header icon-blue">
+                                <i class="fas fa-lightbulb"></i>
+                                <h5>Improvement Suggestions</h5>
+                            </div>
+                            <ul class="detail-list">
+                                {% for sug in analysis.suggestions %}
+                                <li><i class="fas fa-arrow-right text-info me-2"></i>{{ sug }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crop info -->
+                <div class="row g-4 mt-2">
+                    <div class="col-lg-6">
+                        <div class="detail-card glass-card h-100">
+                            <div class="detail-card-header icon-green">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h5>Season for {{ selected|capitalize }}</h5>
+                            </div>
+                            <p class="detail-card-body">{{ info.season }}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="detail-card glass-card h-100">
+                            <div class="detail-card-header icon-blue">
+                                <i class="fas fa-tint"></i>
+                                <h5>Water Requirement</h5>
+                            </div>
+                            <p class="detail-card-body">{{ info.water }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5 mb-4">
+                    <a href="{{ url_for('suitability') }}" class="btn btn-hero-primary">
+                        <i class="fas fa-redo me-2"></i>Check Another Crop
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

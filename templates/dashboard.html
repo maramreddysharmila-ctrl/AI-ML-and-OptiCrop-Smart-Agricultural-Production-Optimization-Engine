@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}Research Dashboard{% endblock %}
+
+{% block content %}
+<section class="section-padding-top section-padding">
+    <div class="container">
+        <div class="text-center mb-5" data-animate="fade-up">
+            <span class="section-tag">Scenario 3</span>
+            <h2 class="section-title">Research Dashboard</h2>
+            <p class="section-subtitle mx-auto">
+                Interactive visualizations of crop distributions, NPK analysis, and environmental patterns
+                from the OptiCrop dataset.
+            </p>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="row g-4 mb-4" data-animate="fade-up">
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-green"><i class="fas fa-seedling"></i></div>
+                    <h3>{{ data.crop_counts|length }}</h3>
+                    <p>Unique Crops</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-blue"><i class="fas fa-vial"></i></div>
+                    <h3>{{ data.npk_stats.N.max|round(0) }}</h3>
+                    <p>Max N (kg/ha)</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-orange"><i class="fas fa-cloud-rain"></i></div>
+                    <h3>{{ data.distributions.rainfall|length }}+</h3>
+                    <p>Rainfall Samples</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon icon-purple"><i class="fas fa-thermometer-half"></i></div>
+                    <h3>{{ data.distributions.temperature|length }}+</h3>
+                    <p>Temp Samples</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crop Distribution Chart -->
+        <div class="row g-4" data-animate="fade-up">
+            <div class="col-12">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-chart-bar me-2"></i>Most Common Crops (Distribution)</h4>
+                    <canvas id="cropDistChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- NPK Analysis -->
+        <div class="row g-4 mt-1" data-animate="fade-up">
+            <div class="col-12">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-flask me-2"></i>NPK Analysis per Crop (Average)</h4>
+                    <canvas id="npkChart" height="120"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- NPK Stats Cards -->
+        <div class="row g-4 mt-1" data-animate="fade-up">
+            {% for nutrient, stats in data.npk_stats.items() %}
+            <div class="col-md-4">
+                <div class="chart-card glass-card h-100">
+                    <h4 class="chart-title"><i class="fas fa-vial me-2"></i>{{ nutrient }} Statistics</h4>
+                    <div class="npk-stat-grid">
+                        <div class="npk-stat-item">
+                            <span class="npk-stat-label">Mean</span>
+                            <span class="npk-stat-value">{{ stats.mean|round(1) }}</span>
+                        </div>
+                        <div class="npk-stat-item">
+                            <span class="npk-stat-label">Median</span>
+                            <span class="npk-stat-value">{{ stats.median|round(1) }}</span>
+                        </div>
+                        <div class="npk-stat-item">
+                            <span class="npk-stat-label">Min</span>
+                            <span class="npk-stat-value">{{ stats.min|round(1) }}</span>
+                        </div>
+                        <div class="npk-stat-item">
+                            <span class="npk-stat-label">Max</span>
+                            <span class="npk-stat-value">{{ stats.max|round(1) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Distribution Charts -->
+        <div class="row g-4 mt-1" data-animate="fade-up">
+            <div class="col-lg-6">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-cloud-rain me-2"></i>Rainfall Distribution</h4>
+                    <canvas id="rainfallChart"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-thermometer-half me-2"></i>Temperature Distribution</h4>
+                    <canvas id="tempChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1" data-animate="fade-up">
+            <div class="col-lg-6">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-tint me-2"></i>Humidity Distribution</h4>
+                    <canvas id="humidityChart"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-balance-scale me-2"></i>pH Distribution</h4>
+                    <canvas id="phChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Correlation Heatmap -->
+        <div class="row g-4 mt-1" data-animate="fade-up">
+            <div class="col-12">
+                <div class="chart-card glass-card">
+                    <h4 class="chart-title"><i class="fas fa-th me-2"></i>Feature Correlation Matrix</h4>
+                    <div class="heatmap-wrapper" id="heatmapWrapper"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Pass server data to JS
+const DASHBOARD_DATA = {{ data | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
