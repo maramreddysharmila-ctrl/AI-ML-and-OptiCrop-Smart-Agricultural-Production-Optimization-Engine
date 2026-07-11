@@ -209,3 +209,6 @@ This project is created for the SmartBridge Virtual Internship program. Free to 
 - **SmartBridge** – Virtual Internship Program
 - Dataset inspired by the [Crop Recommendation Dataset](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset) on Kaggle
 - Built with Flask, Scikit-learn, Bootstrap 5, and Chart.js
+
+  ## Demo video
+  https://drive.google.com/file/d/1Te4rFVQWtdZErSqgFj4UwmSEK8sLkO6H/view?usp=drive_link
