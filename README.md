@@ -3,7 +3,7 @@
 A Machine Learning-powered agricultural recommendation system that predicts the most suitable crop based on soil nutrients and environmental conditions. Built as part of the **SmartBridge Virtual Internship**.
 
 ---
-
+ 
 ## Project Overview
 
 OptiCrop analyzes seven key agricultural parameters — Nitrogen (N), Phosphorous (P), Potassium (K), Temperature, Humidity, pH, and Rainfall — and recommends the best crop to plant for maximum yield and sustainability. The system also includes a crop suitability checker and an interactive research dashboard.
